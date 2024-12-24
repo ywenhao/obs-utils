@@ -44,7 +44,6 @@ export default async ({ mode }: ConfigEnv) => {
 # obs-upload
 
 上传到华为云 obs
-需要安装 `tsx` 插件
 
 ```json
 // package.json
