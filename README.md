@@ -11,6 +11,8 @@ vite + uniapp
 在 vite.config.ts 配置
 
 ```ts
+import { obsStatic } from './node_modules/@bmjs/obs-upload/src/obsStatic'
+
 export default async ({ mode }: ConfigEnv) => {
 
   const env = loadEnv(mode, process.cwd())
