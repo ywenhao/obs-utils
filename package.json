@@ -1,0 +1,25 @@
+{
+  "name": "@bmjs/obs-upload",
+  "version": "0.0.2",
+  "keywords": [],
+  "author": "ywenhao",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "vite": "^6.0.5"
+  },
+  "dependencies": {
+    "esdk-obs-nodejs": "^3.24.3",
+    "fast-glob": "^3.3.2"
+  },
+  "peerDependencies": {
+    "vite": ">=5.0.0"
+  },
+  "exports": {
+    "./deleteStatic": "./src/deleteStatic.ts",
+    "./uploadStatic": "./src/upload-static.ts",
+    "./uploadAssets": "./src/upload-assets.ts",
+    "./replaceStaticPath": "./src/obsStatic.ts"
+  }
+}
