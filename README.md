@@ -1,43 +1,47 @@
-# 这是一个 obs 上传相关的库
+# 这是一个 obs 工具相关的库
 
 # 环境
 
 vite + uniapp
 
-# deleteStatic
+# deleteDirs
 
 打包后删除产物中 static 文件夹
 
 在 vite.config.ts 配置
 
 ```ts
-import { obsStatic } from './node_modules/@bmjs/obs-upload/src/obsStatic'
+import { deleteDirs, reStaticToObs } from '@bmjs/obs-utils/vite'
 
 export default async ({ mode }: ConfigEnv) => {
 
   const env = loadEnv(mode, process.cwd())
   const { VITE_BASE_URL } = env
-  const staticUrl = env.VITE_OBS_URL.replace('//obs', `//${env.VITE_OBS_USER_NAME}.obs`) + '/h5'
+  const obsUrl = env.VITE_OBS_URL.replace('//obs', `//${env.VITE_OBS_USER_NAME}.obs`) + '/h5'
 
   return defineConfig({
     plugins: [
-      // obsStatic({ obsUrl: staticUrl }),
+      reStaticToObs({
+        obsUrl,
+        // obsUrl: 'https://bmjs.oss-cn-hangzhou.aliyuncs.com',
+      }),
       // ...其他插件
-      //deleteStatic(['tabBar'])
+      // deleteDirs({
+      //  dirs: ['static', 'assets'],
+      // }),
     ],
-    base: mode === 'development' ? './' : staticUrl,
+    // 这里影响assets产物的路径
+    base: mode === 'development' ? './' : obsUrl,
   })
 });
 
 ```
 
-# obsStatic 如上
+# reStaticToObs 如上
 
 替换文件中的 static url 为 obs 地址
 
-# upload-assets
-
-# upload-static
+# obs-upload
 
 上传到华为云 obs
 需要安装 `tsx` 插件
@@ -46,18 +50,17 @@ export default async ({ mode }: ConfigEnv) => {
 // package.json
 {
   "scripts": {
-    "upload:obs": "pnpm run upload:obs-assets && pnpm run upload:obs-static",
-    "upload:obs-static": "tsx ./node_modules/@bmjs/obs-upload/src/upload-static",
-    "upload:obs-assets": "tsx ./node_modules/@bmjs/obs-upload/src/upload-assets"
+    "obs-upload": "obs-upload dist/build/h5 h5",
+    "obs-upload:assets": "obs-upload dist/build/h5/assets h5/assets",
+    "obs-upload:static": "obs-upload dist/build/h5/static h5/static"
   }
 }
 ```
 
 # .env 文件 示例
 
-# obs 地址
-
 ```env
+# obs 地址
 VITE_OBS_URL="https://obs.cn-north-4.myhuaweicloud.com"
 
 VITE_OBS_USER_NAME="xxx"

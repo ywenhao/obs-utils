@@ -1,6 +1,6 @@
 import { type Plugin } from 'vite'
 
-export type ObsStaticOption = {
+export type ReStaticToObsOption = {
   /**
    * 'development' | 'production'
    * @default 'development'
@@ -9,10 +9,15 @@ export type ObsStaticOption = {
   obsUrl: string
 }
 
-export function obsStatic(option?: ObsStaticOption): Plugin {
+/**
+ * 重命名代码中的静态资源路径
+ * @param option
+ * @returns
+ */
+export function reStaticToObs(option?: ReStaticToObsOption): any {
   const { obsUrl } = option || {}
-  return {
-    name: 'obs-static',
+  return <Plugin>{
+    name: 're-static-to-obs',
     transform(code) {
       code = code.replace(
         /import (.*) from ('|"){0,1}@{0,1}\/static\//g,
@@ -31,6 +36,6 @@ export function obsStatic(option?: ObsStaticOption): Plugin {
       code = code.replace(/('|")(\.\.\/){1,}static\//g, `$1${obsUrl}/static/`)
 
       return code
-    }
+    },
   }
 }

@@ -1,25 +1,64 @@
 {
-  "name": "@bmjs/obs-upload",
-  "version": "0.0.3",
-  "keywords": [],
+  "name": "@bmjs/obs-utils",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "obs-utils",
   "author": "ywenhao",
-  "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "@types/node": "^22.10.2",
-    "vite": "^6.0.5"
+  "license": "MIT",
+  "keywords": [
+    "obs-utils",
+    "huawei obs-utils"
+  ],
+  "sideEffects": false,
+  "exports": {
+    "./vite": {
+      "import": {
+        "types": "./dist/vite/index.d.ts",
+        "default": "./dist/vite/index.js"
+      },
+      "require": {
+        "types": "./dist/vite/index.d.cts",
+        "default": "./dist/vite/index.cjs"
+      }
+    },
+    "./upload": {
+      "import": {
+        "types": "./dist/upload/index.d.ts",
+        "default": "./dist/upload/index.js"
+      },
+      "require": {
+        "types": "./dist/upload/index.d.cts",
+        "default": "./dist/upload/index.cjs"
+      }
+    },
+    "./*": "./*"
   },
-  "dependencies": {
-    "esdk-obs-nodejs": "^3.24.3",
-    "fast-glob": "^3.3.2"
+  "bin": {
+    "obs-upload": "./dist/upload/index.js"
+  },
+  "files": [
+    "*.d.ts",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/**/*.ts --format cjs,esm --dts --splitting --clean",
+    "dev": "tsup src/**/*.ts --watch src",
+    "lint": "eslint .",
+    "lint:fix": "nr lint --fix"
   },
   "peerDependencies": {
     "vite": ">=5.0.0"
   },
-  "exports": {
-    "./deleteStatic": "./src/deleteStatic.ts",
-    "./uploadStatic": "./src/upload-static.ts",
-    "./uploadAssets": "./src/upload-assets.ts",
-    "./replaceStaticPath": "./src/obsStatic.ts"
+  "dependencies": {
+    "consola": "^3.3.1",
+    "esdk-obs-nodejs": "^3.24.3",
+    "fast-glob": "^3.3.2"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^3.12.1",
+    "@antfu/ni": "^0.23.2",
+    "@types/node": "^22.10.2",
+    "tsup": "^8.3.5",
+    "vite": "^6.0.5"
   }
 }
