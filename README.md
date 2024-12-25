@@ -28,6 +28,7 @@ export default async ({ mode }: ConfigEnv) => {
       // ...其他插件
       // deleteDirs({
       //  dirs: ['static', 'assets'],
+      //  exclude: ['tabBar']
       // }),
     ],
     // 这里影响assets产物的路径
@@ -44,6 +45,7 @@ export default async ({ mode }: ConfigEnv) => {
 # obs-upload
 
 上传到华为云 obs
+`obs-upload [source] [target]`
 
 ```json
 // package.json
