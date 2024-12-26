@@ -23,6 +23,7 @@ export default async ({ mode }: ConfigEnv) => {
     plugins: [
       reStaticToObs({
         obsUrl,
+        enable: true,
         // obsUrl: 'https://bmjs.oss-cn-hangzhou.aliyuncs.com',
       }),
       // ...其他插件

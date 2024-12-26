@@ -2,10 +2,10 @@ import type { Plugin } from 'vite'
 
 export interface ReStaticToObsOption {
   /**
-   * 'development' | 'production'
-   * @default 'development'
+   * 是否启用
+   * @default true
    */
-  mode?: string
+  enable?: boolean
   obsUrl: string
 }
 
@@ -14,10 +14,13 @@ export interface ReStaticToObsOption {
  * @param option
  */
 export function reStaticToObs(option?: ReStaticToObsOption): any {
-  const { obsUrl } = option || {}
+  const { obsUrl, enable = true } = option || {}
   return <Plugin>{
     name: 're-static-to-obs',
     transform(code) {
+      if (!enable)
+        return code
+
       code = code.replace(
         /import (.*) from ('|")?@?\/static\//g,
         ($0, $1, $2) => `const ${$1} = ${$2}${obsUrl}/static/`,
