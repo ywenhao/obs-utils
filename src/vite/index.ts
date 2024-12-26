@@ -1,2 +1,2 @@
-export * from './reStaticToObs'
 export * from './deleteDirs'
+export * from './reStaticToObs'

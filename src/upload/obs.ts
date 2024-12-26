@@ -1,19 +1,20 @@
-import fg from 'fast-glob'
 import fs from 'node:fs'
 import consola from 'consola'
-import { loadEnv } from 'vite'
+// eslint-disable-next-line ts/ban-ts-comment
 // @ts-ignore
 import ObsClient from 'esdk-obs-nodejs'
+import fg from 'fast-glob'
+import { loadEnv } from 'vite'
 // const ObsClient = require('esdk-obs-nodejs')
 
-export function createObs(): { obsClient: any; env: Record<string, string> } {
+export function createObs(): { obsClient: any, env: Record<string, string> } {
   const env = loadEnv('', process.cwd())
 
   if (
-    !env?.VITE_OBS_ACCESS_KEY_ID ||
-    !env?.VITE_OBS_SECRET_ACCESS_KEY ||
-    !env?.VITE_OBS_URL ||
-    !env?.VITE_OBS_USER_NAME
+    !env?.VITE_OBS_ACCESS_KEY_ID
+    || !env?.VITE_OBS_SECRET_ACCESS_KEY
+    || !env?.VITE_OBS_URL
+    || !env?.VITE_OBS_USER_NAME
   ) {
     consola.error(new Error('env 没有正确配置'))
     process.exit(1)
@@ -37,7 +38,7 @@ function getPathsByArgv() {
   return { inPath: argv[0], uploadPrefix: argv[1] }
 }
 
-export const uploadObs = async () => {
+export async function uploadObs() {
   const { obsClient, env } = createObs()
   const { inPath, uploadPrefix } = getPathsByArgv()
 
@@ -62,7 +63,7 @@ export const uploadObs = async () => {
         consola.success(
           'Put object(%s) under the bucket(%s) successful!!',
           params.Key,
-          params.Bucket
+          params.Bucket,
         )
         // consola.info('RequestId: %s', result.CommonMsg.RequestId)
         // consola.info(
@@ -74,16 +75,17 @@ export const uploadObs = async () => {
       }
       // 上传失败，输出错误信息
       consola.error(
-        'An ObsError was found, which means your request sent to OBS was rejected with an error response.'
+        'An ObsError was found, which means your request sent to OBS was rejected with an error response.',
       )
       consola.error('Status: %d', result.CommonMsg.Status)
       consola.error('Code: %s', result.CommonMsg.Code)
       consola.error('Message: %s', result.CommonMsg.Message)
       consola.error('RequestId: %s', result.CommonMsg.RequestId)
-    } catch (error) {
+    }
+    catch (error) {
       // 捕获上传过程中发生的异常
       consola.error(
-        'An Exception was found, which means the client encountered an internal problem when attempting to communicate with OBS, for example, the client was unable to access the network.'
+        'An Exception was found, which means the client encountered an internal problem when attempting to communicate with OBS, for example, the client was unable to access the network.',
       )
       consola.error(error)
     }
@@ -92,7 +94,7 @@ export const uploadObs = async () => {
   // 使用fast-glob库获取指定路径下的文件列表
   const glob = await fg(`${inPath}/**/*`, { absolute: true })
   // 过滤出文件列表，只保留存在的文件
-  const list = glob.filter((v) => fs.existsSync(v) && fs.statSync(v).isFile())
+  const list = glob.filter(v => fs.existsSync(v) && fs.statSync(v).isFile())
 
   // 并发处理文件上传
   // 设置最大并发池大小
@@ -100,7 +102,7 @@ export const uploadObs = async () => {
   // 循环处理文件列表，每批处理MAX_POOL_SIZE个文件
   for (let i = 0; i < list.length; i += MAX_POOL_SIZE) {
     // 使用Promise.all并发处理文件上传
-    await Promise.all(list.slice(i, i + MAX_POOL_SIZE).map((item) => upload(item)))
+    await Promise.all(list.slice(i, i + MAX_POOL_SIZE).map(item => upload(item)))
   }
 }
 

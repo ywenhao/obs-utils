@@ -1,7 +1,7 @@
+import type { Plugin } from 'vite'
 import { deleteDir } from './delete-utils'
-import { Plugin } from 'vite'
 
-type DeleteDirsOption = {
+interface DeleteDirsOption {
   dirs: string[]
   exclude?: string[]
 }
@@ -12,7 +12,7 @@ export function deleteDirs(option: DeleteDirsOption): any {
     name: 'delete-dirs',
     closeBundle() {
       setTimeout(() => {
-        dirs.forEach((dir) => deleteDir(dir, exclude))
+        dirs.forEach(dir => deleteDir(dir, exclude))
       }, 2000)
     },
   }
