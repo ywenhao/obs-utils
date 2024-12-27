@@ -54,7 +54,8 @@ export default async ({ mode }: ConfigEnv) => {
   "scripts": {
     "obs-upload": "obs-upload dist/build/h5 h5",
     "obs-upload:assets": "obs-upload dist/build/h5/assets h5/assets",
-    "obs-upload:static": "obs-upload dist/build/h5/static h5/static"
+    "obs-upload:static": "obs-upload src/static h5/static",
+    // "obs-upload:static": "obs-upload dist/build/h5/static h5/static"
   }
 }
 ```
