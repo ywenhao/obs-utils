@@ -19,6 +19,8 @@ export default async ({ mode }: ConfigEnv) => {
   const { VITE_BASE_URL } = env
   const obsUrl = env.VITE_OBS_URL.replace('//obs', `//${env.VITE_OBS_USER_NAME}.obs`) + '/h5'
 
+  const isMP_WEIXIN = process.env.UNI_PLATFORM === 'mp-weixin'
+
   return defineConfig({
     plugins: [
       reStaticToObs({
@@ -26,11 +28,12 @@ export default async ({ mode }: ConfigEnv) => {
         enable: true,
         // obsUrl: 'https://bmjs.oss-cn-hangzhou.aliyuncs.com',
       }),
-      // ...其他插件
       // deleteDirs({
+      //  enable: isMP_WEIXIN,
       //  dirs: ['static', 'assets'],
       //  exclude: ['tabBar']
       // }),
+      // ...其他插件
     ],
     // 这里影响assets产物的路径
     base: mode === 'development' ? './' : obsUrl,
