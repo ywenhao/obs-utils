@@ -2,6 +2,7 @@
   "prettier.enable": false,
   "cSpell.words": [
     "tsdown",
+    "unconfig",
     "WEIXIN"
   ]
 }

@@ -55,21 +55,27 @@ export default async ({ mode }: ConfigEnv) => {
 // package.json
 {
   "scripts": {
-    "obs-upload": "obs-upload dist/build/h5 h5",
-    "obs-upload:assets": "obs-upload dist/build/h5/assets h5/assets",
-    "obs-upload:static": "obs-upload src/static h5/static",
-    // "obs-upload:static": "obs-upload dist/build/h5/static h5/static"
+    "obs-upload": "obs-upload",
   }
 }
 ```
 
 # .env 文件 示例
 
-```env
-# obs 地址
-VITE_OBS_URL="https://obs.cn-north-4.myhuaweicloud.com"
+```ts
+// obs-upload.config.ts
 
-VITE_OBS_USER_NAME="xxx"
-VITE_OBS_ACCESS_KEY_ID="xxx"
-VITE_OBS_SECRET_ACCESS_KEY="xxx"
+import { defineConfig } from '@bmjs/obs-utils/upload'
+
+export default defineConfig({
+  obsUrl: 'https://obs.cn-north-4.myhuaweicloud.com',
+  obsUserName: 'admin',
+  obsAccessKeyId: 'admin',
+  obsSecretAccessKey: 'admin',
+  // { 本地要上传的文件路径 : obs 上的文件路径 }
+  entry: {
+    './dist/build/h5': 'h5',
+  },
+})
+
 ```
