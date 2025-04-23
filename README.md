@@ -62,8 +62,6 @@ export default async ({ mode }: ConfigEnv) => {
 }
 ```
 
-# .env 文件 示例
-
 ```ts
 // obs-upload.config.ts
 
