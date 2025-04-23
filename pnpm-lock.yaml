@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      ansis:
+        specifier: ^3.17.0
+        version: 3.17.0
       consola:
         specifier: ^3.3.1
         version: 3.3.1
@@ -18,7 +21,7 @@ importers:
         specifier: ^3.3.2
         version: 3.3.2
       vite:
-        specifier: ^6.0.5
+        specifier: '>=5.0.0'
         version: 6.0.5(@types/node@22.10.2)(jiti@2.4.2)(yaml@2.6.1)
     devDependencies:
       '@antfu/eslint-config':
@@ -30,9 +33,6 @@ importers:
       '@types/node':
         specifier: ^22.10.2
         version: 22.10.2
-      ansis:
-        specifier: ^3.17.0
-        version: 3.17.0
       tsdown:
         specifier: ^0.9.3
         version: 0.9.3(typescript@5.7.2)
