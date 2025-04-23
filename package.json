@@ -41,8 +41,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup src/**/*.ts --format cjs,esm --dts --splitting --clean",
-    "dev": "tsup src/**/*.ts --watch src",
+    "build:tsdown": "tsdown",
+    "dev": "tsdown --watch src",
     "lint": "eslint .",
     "lint:fix": "nr lint --fix"
   },
@@ -58,7 +58,7 @@
     "@antfu/eslint-config": "^3.12.1",
     "@antfu/ni": "^0.23.2",
     "@types/node": "^22.10.2",
-    "tsup": "^8.3.5",
+    "tsdown": "^0.9.3",
     "vite": "^6.0.5"
   }
 }
