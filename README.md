@@ -50,12 +50,14 @@ export default async ({ mode }: ConfigEnv) => {
 
 上传到华为云 obs
 `obs-upload [source] [target]`
+- 命令行上有命令优先读取命令行的参数，没有就读取config文件
 
 ```json
 // package.json
 {
   "scripts": {
     "obs-upload": "obs-upload",
+    "obs-upload:h5": "obs-upload dist/build/h5 h5",
   }
 }
 ```

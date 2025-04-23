@@ -35,9 +35,21 @@ export async function createObs() {
   return { obsClient, config }
 }
 
+function getPathsByArgv() {
+  const argv = process.argv.slice(2)
+  if (argv.length) {
+    if (argv.length !== 2) {
+      consola.error(new Error('命令参数不正确'))
+      process.exit(1)
+    }
+    return { [argv[0]]: argv[1] }
+  }
+}
+
 export async function uploadObs() {
   const { obsClient, config } = await createObs()
-  const entry = config.entry
+  const paths = getPathsByArgv()
+  const entry = paths || config.entry
 
   for (const sourcePath in entry) {
     start(sourcePath, entry[sourcePath])
