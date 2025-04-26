@@ -41,7 +41,7 @@
     "dist"
   ],
   "scripts": {
-    "build:tsdown": "tsdown",
+    "build": "tsdown",
     "dev": "tsdown --watch src",
     "lint": "eslint .",
     "lint:fix": "nr lint --fix"
