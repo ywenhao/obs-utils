@@ -2,7 +2,7 @@
   "name": "@bmjs/obs-utils",
   "type": "module",
   "version": "1.0.2",
-  "packageManager": "pnpm@10.10.0+sha512.d615db246fe70f25dcfea6d8d73dee782ce23e2245e3c4f6f888249fb568149318637dca73c2c5c8ef2a4ca0d5657fb9567188bfab47f566d1ee6ce987815c39",
+  "packageManager": "pnpm@10.14.0",
   "description": "obs-utils",
   "author": "ywenhao",
   "license": "MIT",
@@ -51,16 +51,16 @@
     "vite": ">=5.0.0"
   },
   "dependencies": {
-    "ansis": "^3.17.0",
-    "consola": "^3.3.1",
-    "esdk-obs-nodejs": "^3.24.3",
-    "fast-glob": "^3.3.2"
+    "ansis": "^4.1.0",
+    "consola": "^3.4.2",
+    "esdk-obs-nodejs": "^3.25.6",
+    "fast-glob": "^3.3.3"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.12.1",
-    "@antfu/ni": "^0.23.2",
-    "@types/node": "^22.10.2",
-    "tsdown": "^0.11.0",
+    "@antfu/eslint-config": "^5.1.0",
+    "@antfu/ni": "^25.0.0",
+    "@types/node": "^24.2.0",
+    "tsdown": "^0.13.3",
     "unconfig": "^7.3.2"
   }
 }
