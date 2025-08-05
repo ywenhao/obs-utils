@@ -1,7 +1,7 @@
 import type { ObsUploadConfig } from './types'
 import fs from 'node:fs'
 import c from 'ansis'
-import consola from 'consola'
+import { consola } from 'consola'
 // eslint-disable-next-line ts/ban-ts-comment
 // @ts-ignore
 import ObsClient from 'esdk-obs-nodejs'

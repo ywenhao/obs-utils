@@ -5,7 +5,7 @@ export interface ReStaticToObsOption {
    * 是否启用
    * @default true
    */
-  enable?: boolean
+  enabled?: boolean
   obsUrl: string
 }
 
@@ -14,11 +14,11 @@ export interface ReStaticToObsOption {
  * @param option
  */
 export function reStaticToObs(option?: ReStaticToObsOption): any {
-  const { obsUrl, enable = true } = option || {}
+  const { obsUrl, enabled = true } = option || {}
   return <Plugin>{
     name: 're-static-to-obs',
     transform(code) {
-      if (!enable)
+      if (!enabled)
         return code
 
       code = code.replace(

@@ -25,11 +25,11 @@ export default async ({ mode }: ConfigEnv) => {
     plugins: [
       reStaticToObs({
         obsUrl,
-        enable: true,
+        enabled: true,
         // obsUrl: 'https://bmjs.oss-cn-hangzhou.aliyuncs.com',
       }),
       // deleteDirs({
-      //  enable: isMP_WEIXIN,
+      //  enabled: isMP_WEIXIN,
       //  dirs: ['static', 'assets'],
       //  exclude: ['tabBar']
       // }),

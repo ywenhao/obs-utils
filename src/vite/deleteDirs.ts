@@ -6,17 +6,17 @@ interface DeleteDirsOption {
    * 是否启用
    * @default true
    */
-  enable?: boolean
+  enabled?: boolean
   dirs: string[]
   exclude?: string[]
 }
 
 export function deleteDirs(option: DeleteDirsOption): any {
-  const { dirs, exclude = [], enable = true } = option
+  const { dirs, exclude = [], enabled = true } = option
   return <Plugin>{
     name: 'delete-dirs',
     closeBundle() {
-      if (!enable)
+      if (!enabled)
         return
 
       setTimeout(() => {
