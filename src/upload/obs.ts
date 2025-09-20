@@ -7,6 +7,7 @@ import { consola } from 'consola'
 import ObsClient from 'esdk-obs-nodejs'
 import fg from 'fast-glob'
 import { configLoader } from './config'
+import { promisePool } from './promisePool'
 // const ObsClient = require('esdk-obs-nodejs')
 
 export async function createObs() {
@@ -94,6 +95,7 @@ export async function uploadObs() {
       consola.error('Code: %s', result.CommonMsg.Code)
       consola.error('Message: %s', result.CommonMsg.Message)
       consola.error('RequestId: %s', result.CommonMsg.RequestId)
+      throw new Error('上传失败')
     }
     catch (error) {
       // 捕获上传过程中发生的异常
@@ -101,6 +103,7 @@ export async function uploadObs() {
         'An Exception was found, which means the client encountered an internal problem when attempting to communicate with OBS, for example, the client was unable to access the network.',
       )
       consola.error(error)
+      throw new Error('上传失败')
     }
   }
 
@@ -114,14 +117,12 @@ export async function uploadObs() {
     // 过滤出文件列表，只保留存在的文件
     const list = glob.filter(v => fs.existsSync(v) && fs.statSync(v).isFile())
 
-    // 并发处理文件上传
-    // 循环处理文件列表，每批处理MAX_POOL_SIZE个文件
-    for (let i = 0; i < list.length; i += MAX_POOL_SIZE) {
-      // 使用Promise.all并发处理文件上传
-      await Promise.all(list.slice(i, i + MAX_POOL_SIZE)
-        .map(item => upload(item, sourcePath, targetPath)))
+    try {
+      await promisePool(list.map(item => () => upload(item, sourcePath, targetPath)),  MAX_POOL_SIZE)
+      consola.log(c.greenBright`${sourcePath} 到 ${targetPath} 上传完成`)
+    } catch  {
+      process.exit(1)      
     }
-    consola.log(c.greenBright`${sourcePath} 到 ${targetPath} 上传完成`)
   }
 }
 

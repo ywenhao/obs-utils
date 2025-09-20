@@ -2,7 +2,6 @@
   "name": "@bmjs/obs-utils",
   "type": "module",
   "version": "1.0.3",
-  "packageManager": "pnpm@10.14.0",
   "description": "obs-utils",
   "author": "ywenhao",
   "license": "MIT",
