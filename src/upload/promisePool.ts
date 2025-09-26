@@ -18,6 +18,7 @@ export async function promisePool<T extends PromiseFn>(
     if (stopped)
       break
 
+    // 大于limit时需要等待任意一个promise完成
     if (poolSet.size >= limit)
       await Promise.race(poolSet)
 
@@ -33,6 +34,9 @@ export async function promisePool<T extends PromiseFn>(
 
     poolSet.add(p)
   }
+
+  // 等待所有promise完成
+  await Promise.all(poolSet)
 
   if (error)
     throw error
