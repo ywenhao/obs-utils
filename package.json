@@ -59,7 +59,7 @@
     "@antfu/eslint-config": "^5.1.0",
     "@antfu/ni": "^25.0.0",
     "@types/node": "^24.2.0",
-    "tsdown": "^0.13.3",
-    "unconfig": "^7.3.2"
+    "tsdown": "^0.15.4",
+    "unconfig": "^7.3.3"
   }
 }
