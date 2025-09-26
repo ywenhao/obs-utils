@@ -14,8 +14,6 @@ export async function promisePool<T extends PromiseFn>(
   let stopped = false
   let error: any = null
 
-  const results: any[] = []
-
   for (const promiseFn of promiseList) {
     if (stopped)
       break
@@ -24,9 +22,8 @@ export async function promisePool<T extends PromiseFn>(
       await Promise.race(poolSet)
 
     const p = promiseFn()
-      .then((res) => {
+      .then(() => {
         poolSet.delete(p)
-        results.push(res)
       })
       .catch((err) => {
         poolSet.delete(p)
@@ -39,5 +36,4 @@ export async function promisePool<T extends PromiseFn>(
 
   if (error)
     throw error
-  return results
 }
