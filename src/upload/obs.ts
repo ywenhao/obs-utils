@@ -118,10 +118,11 @@ export async function uploadObs() {
     const list = glob.filter(v => fs.existsSync(v) && fs.statSync(v).isFile())
 
     try {
-      await promisePool(list.map(item => () => upload(item, sourcePath, targetPath)),  MAX_POOL_SIZE)
+      await promisePool(list.map(item => () => upload(item, sourcePath, targetPath)), MAX_POOL_SIZE)
       consola.log(c.greenBright`${sourcePath} 到 ${targetPath} 上传完成`)
-    } catch  {
-      process.exit(1)      
+    }
+    catch {
+      process.exit(1)
     }
   }
 }
