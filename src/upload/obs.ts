@@ -1,5 +1,6 @@
 import type { ObsUploadConfig } from './types'
 import fs from 'node:fs'
+import path from 'node:path'
 import c from 'ansis'
 import { consola } from 'consola'
 // eslint-disable-next-line ts/ban-ts-comment
@@ -114,8 +115,11 @@ export async function uploadObs() {
     // 使用fast-glob库获取指定路径下的文件列表
     consola.log(c.greenBright`开始上传 ${sourcePath} 到 ${targetPath}`)
     const glob = await fg(`${sourcePath}/**/*`, { absolute: true })
+
     // 过滤出文件列表，只保留存在的文件
     const list = glob.filter(v => fs.existsSync(v) && fs.statSync(v).isFile())
+
+    sourcePath = path.resolve(sourcePath).replaceAll('\\', '/')
 
     try {
       await promisePool(list.map(item => () => upload(item, sourcePath, targetPath)), MAX_POOL_SIZE)
