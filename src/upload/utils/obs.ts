@@ -1,4 +1,4 @@
-import type { ObsUploadConfig } from './types'
+import type { UploadConfig } from '../types'
 import fs from 'node:fs'
 import path from 'node:path'
 import c from 'ansis'
@@ -7,26 +7,15 @@ import { consola } from 'consola'
 // @ts-ignore
 import ObsClient from 'esdk-obs-nodejs'
 import fg from 'fast-glob'
-import { configLoader } from './config'
+import { checkConfig, configLoader } from './config'
 import { promisePool } from './promisePool'
 // const ObsClient = require('esdk-obs-nodejs')
 
 export async function createObs() {
   const loader = await configLoader.load()
-  const config = loader.config as ObsUploadConfig
+  const config = loader.config as UploadConfig
 
-  if (
-    !config.obsUrl
-    || !config.obsUserName
-    || !config.obsAccessKeyId
-    || !config.obsSecretAccessKey
-    || !config.entry
-    || Object.keys(config.entry).length === 0
-    || Object.values(config.entry).some(v => !v)
-  ) {
-    consola.error(new Error('obs-upload.config.ts 没有正确配置'))
-    process.exit(1)
-  }
+  checkConfig(config)
 
   const obsClient = new ObsClient({
     access_key_id: config.obsAccessKeyId,

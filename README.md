@@ -63,7 +63,7 @@ export default async ({ mode }: ConfigEnv) => {
 ```
 
 ```ts
-// obs-upload.config.ts
+// upload.config.ts
 
 import { defineConfig } from '@bmjs/obs-utils/upload'
 
