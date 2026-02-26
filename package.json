@@ -21,20 +21,10 @@
         "default": "./dist/vite/index.cjs"
       }
     },
-    "./upload": {
-      "import": {
-        "types": "./dist/upload/index.d.mts",
-        "default": "./dist/upload/index.mjs"
-      },
-      "require": {
-        "types": "./dist/upload/index.d.cts",
-        "default": "./dist/upload/index.cjs"
-      }
-    },
     "./*": "./*"
   },
   "bin": {
-    "obs-upload": "./dist/upload/index.mjs"
+    "obs-upload": "./dist/upload/cli.mjs"
   },
   "files": [
     "*.d.ts",
@@ -50,18 +40,29 @@
     "vite": ">=5.0.0"
   },
   "dependencies": {
+    "ali-oss": "^6.23.0",
     "ansis": "^4.2.0",
     "consola": "^3.4.2",
     "esdk-obs-nodejs": "^3.25.6",
     "fast-glob": "^3.3.3",
-    "jiti": "^2.6.1"
+    "jiti": "^2.6.1",
+    "semver": "^7.7.4"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^7.4.3",
+    "@types/ali-oss": "^6.23.3",
     "@types/node": "^25.2.3",
     "eslint": "^9.39.2",
     "tsdown": "^0.20.3",
     "typescript": "^5.9.3",
     "unconfig": "^7.4.2"
+  },
+  "overrides": {
+    "semver": "^7.7.4"
+  },
+  "pnpm": {
+    "overrides": {
+      "semver": "^7.7.4"
+    }
   }
 }

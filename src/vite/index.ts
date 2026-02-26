@@ -1,2 +1,2 @@
-export * from './deleteDirs'
-export * from './reStaticToObs'
+export * from '../plugins/deleteDirs'
+export * from '../plugins/reStaticToObs'

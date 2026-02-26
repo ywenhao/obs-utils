@@ -10,7 +10,7 @@
 //   },
 // })
 
-import { defineConfig } from './src/upload/oss'
+import { defineConfig } from './src/vite/oss'
 
 export default defineConfig({
   region: 'https://obs.cn-north-4.myhuaweicloud.com',
