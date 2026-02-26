@@ -30,7 +30,7 @@ export interface ObsUploadConfig extends EntryConfig {
  * 七牛云
  */
 export interface QiNiuUploadConfig extends EntryConfig {
-  accessKeyId: string
-  accessKeySecret: string
+  accessKey: string
+  secretKey: string
   bucket: string
 }
