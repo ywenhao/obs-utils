@@ -84,7 +84,7 @@ export default defineConfig({
 import { defineConfig } from '@bmjs/obs-utils/vite/oss'
 
 export default defineConfig({
-  region: 'cn-hangzhou',
+  region: 'oss-<region-id>',
   bucket: 'xxx',
   accessKeyId: 'admin',
   accessKeySecret: 'admin',
