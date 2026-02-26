@@ -13,12 +13,22 @@
   "exports": {
     "./vite": {
       "import": {
-        "types": "./dist/vite/index.d.mts",
+        "types": "./dist/vite/index.mts",
         "default": "./dist/vite/index.mjs"
       },
       "require": {
-        "types": "./dist/vite/index.d.cts",
+        "types": "./dist/vite/index.cts",
         "default": "./dist/vite/index.cjs"
+      }
+    },
+    "./vite/*": {
+      "import": {
+        "types": "./dist/vite/*.mts",
+        "default": "./dist/vite/*.mjs"
+      },
+      "require": {
+        "types": "./dist/vite/*.cts",
+        "default": "./dist/vite/*.cjs"
       }
     },
     "./*": "./*"

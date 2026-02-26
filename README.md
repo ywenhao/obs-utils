@@ -65,17 +65,46 @@ export default async ({ mode }: ConfigEnv) => {
 ```ts
 // upload.config.ts
 
-import { defineConfig } from '@bmjs/obs-utils/upload'
+// 华为云obs
+import { defineConfig } from '@bmjs/obs-utils/vite/obs'
 
 export default defineConfig({
-  obsUrl: 'https://obs.cn-north-4.myhuaweicloud.com',
-  obsUserName: 'admin',
-  obsAccessKeyId: 'admin',
-  obsSecretAccessKey: 'admin',
+  url: 'https://obs.cn-north-4.myhuaweicloud.com',
+  userName: 'admin',
+  accessKeyId: 'admin',
+  secretAccessKey: 'admin',
   // { 本地要上传的文件路径 : obs 上的文件路径 }
   entry: {
     './dist/build/h5': 'h5',
   },
 })
 
+
+// 阿里云oss
+import { defineConfig } from '@bmjs/obs-utils/vite/oss'
+
+export default defineConfig({
+  region: 'cn-hangzhou',
+  bucket: 'xxx',
+  accessKeyId: 'admin',
+  accessKeySecret: 'admin',
+  // { 本地要上传的文件路径 : obs 上的文件路径 }
+  entry: {
+    './dist/build/h5': 'h5',
+  },
+})
+
+
+// 七牛云
+import { defineConfig } from '@bmjs/obs-utils/vite/oss'
+
+export default defineConfig({
+  bucket: 'xxx',
+  accessKey: 'admin',
+  secretKey: 'admin',
+  // { 本地要上传的文件路径 : obs 上的文件路径 }
+  entry: {
+    './dist/build/h5': 'h5',
+  },
+})
 ```
