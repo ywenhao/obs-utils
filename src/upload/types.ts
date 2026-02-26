@@ -1,3 +1,5 @@
+import type qiniu$ from 'qiniu'
+
 interface EntryConfig {
   /**
    * { 本地要上传的文件路径 : obs 上的文件路径 }
@@ -33,4 +35,8 @@ export interface QiNiuUploadConfig extends EntryConfig {
   accessKey: string
   secretKey: string
   bucket: string
+  /**
+   * 区域
+   */
+  regionsProvider?: qiniu$.httpc.RegionsProvider
 }

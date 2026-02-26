@@ -106,5 +106,7 @@ export default defineConfig({
   entry: {
     './dist/build/h5': 'h5',
   },
+  // 区域， 可选
+  zonesProvider: qiniu.zone.Zone_z0,
 })
 ```

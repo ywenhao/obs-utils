@@ -52,6 +52,10 @@ async function upload({
   const putExtra = new qiniu$.form_up.PutExtra()
 
   const config$ = new qiniu$.conf.Config()
+  // 区域
+  if (config.regionsProvider) {
+    config$.regionsProvider = config.regionsProvider
+  }
   const formUploader = new qiniu$.form_up.FormUploader(config$)
 
   try {
